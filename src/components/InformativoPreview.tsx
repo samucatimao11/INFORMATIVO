@@ -72,24 +72,39 @@ export function InformativoPreview({ data }: PreviewProps) {
           </div>
 
           {/* Middle Column */}
-          <div className="flex-1 flex flex-col gap-6 pl-2">
-            <div>
+          <div className="flex-1 flex flex-col pl-2">
+            
+            <div className="border-b-[3px] border-[#002f5d] pb-4 mb-4">
               <div className="flex items-center gap-2 mb-1">
                 <Check className="w-5 h-5 text-[#002f5d]" />
-                <h3 className="text-lg font-bold text-[#002f5d] leading-tight">RECOMENDAÇÃO</h3>
+                <h3 className="text-lg font-bold text-[#002f5d]">ÁREA SETOR (ha)</h3>
               </div>
-              <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
-                {parseList(data.recomendacao).map((item, i) => <span key={i}>{item}</span>)}
+              <div className="text-[#002f5d] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
+                <div>TOTAL: <span className="text-[#6bb52e]">{formatNumber(data.areaTotal)}</span></div>
+                <div>REALIZADO: <span className="text-[#6bb52e]">{formatNumber(data.areaRealizado)}</span></div>
+                <div>Á REALIZAR: <span className="text-[#6bb52e]">{formatNumber(data.areaARealizar)}</span></div>
               </div>
             </div>
 
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <Check className="w-5 h-5 text-[#002f5d]" />
-                <h3 className="text-lg font-bold text-[#002f5d]">SEQUENCIAS</h3>
+            <div className="flex flex-col gap-6">
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Check className="w-5 h-5 text-[#002f5d]" />
+                  <h3 className="text-lg font-bold text-[#002f5d] leading-tight">RECOMENDAÇÃO</h3>
+                </div>
+                <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
+                  {parseList(data.recomendacao).map((item, i) => <span key={i}>{item}</span>)}
+                </div>
               </div>
-              <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
-                {parseList(data.sequencias).map((item, i) => <span key={i}>{item}</span>)}
+
+              <div>
+                <div className="flex items-center gap-2 mb-1">
+                  <Check className="w-5 h-5 text-[#002f5d]" />
+                  <h3 className="text-lg font-bold text-[#002f5d]">SEQUENCIAS</h3>
+                </div>
+                <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
+                  {parseList(data.sequencias).map((item, i) => <span key={i}>{item}</span>)}
+                </div>
               </div>
             </div>
           </div>
@@ -106,10 +121,10 @@ export function InformativoPreview({ data }: PreviewProps) {
         <div className="border-[3px] border-[#002f5d] rounded-[30px] p-6 pt-8 h-full flex flex-col relative">
           <h2 className="text-xl font-bold text-[#002f5d] text-center mb-4">RENDIMENTO TURNOS</h2>
           
-          <div className="text-center mb-6 font-bold text-lg">
-            <div className="text-[#002f5d]">TURNO A: <span className="text-[#6bb52e]">{formatNumber(data.turnoA)}</span></div>
-            <div className="text-[#002f5d]">TURNO B: <span className="text-[#6bb52e]">{formatNumber(data.turnoB)}</span></div>
-            <div className="text-[#002f5d]">TURNO C: <span className="text-[#6bb52e]">{formatNumber(data.turnoC)}</span></div>
+          <div className="text-left ml-4 mb-6 font-bold text-lg">
+            <div className="text-[#002f5d]">TURNO A: </div>
+            <div className="text-[#002f5d]">TURNO B: </div>
+            <div className="text-[#002f5d]">TURNO C: </div>
           </div>
 
           {/* Bar Chart Area */}

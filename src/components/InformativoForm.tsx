@@ -9,10 +9,17 @@ interface FormProps {
 export function InformativoForm({ data, onChange }: FormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
-    onChange({
-      ...data,
-      [name]: type === 'number' ? Number(value) : value,
-    });
+    const parsedValue = type === 'number' ? Number(value) : value;
+    
+    const newData = { ...data, [name]: parsedValue };
+
+    if (name === 'areaTotal' || name === 'areaRealizado') {
+      const total = name === 'areaTotal' ? Number(parsedValue) : data.areaTotal;
+      const realizado = name === 'areaRealizado' ? Number(parsedValue) : data.areaRealizado;
+      newData.areaARealizar = Math.max(0, total - realizado);
+    }
+    
+    onChange(newData);
   };
 
   return (
@@ -47,6 +54,24 @@ export function InformativoForm({ data, onChange }: FormProps) {
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Área de Vivência</label>
             <input type="text" name="areaVivencia" value={data.areaVivencia} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 font-mono text-sm" />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-md font-semibold text-gray-800 mb-3 border-b pb-1">Área Setor (ha)</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Total</label>
+            <input type="number" name="areaTotal" value={data.areaTotal} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Realizado</label>
+            <input type="number" name="areaRealizado" value={data.areaRealizado} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Á Realizar</label>
+            <input type="number" name="areaARealizar" value={data.areaARealizar} readOnly disabled className="w-full p-2 border rounded bg-gray-100 text-gray-500" />
           </div>
         </div>
       </div>
