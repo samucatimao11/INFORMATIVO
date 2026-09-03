@@ -1,0 +1,63 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import { useState } from 'react';
+import { InformativoForm } from './components/InformativoForm';
+import { InformativoPreview } from './components/InformativoPreview';
+import { PWAInstallButton } from './components/PWAInstallButton';
+import { InformativoData } from './types';
+
+const defaultData: InformativoData = {
+  frente: 'AUTOPROPELIDOS',
+  setor: '3284',
+  operacao: '745',
+  equipamentos: '4100874\n4100907\n4100783\n4100602\n4100667',
+  caminhao: '4100615',
+  areaVivencia: '4400338',
+  recomendacao: 'ALION – 0,120\nMEGA BR – 4,50\nSINERGE – 3,00\nJUMP – 3,50',
+  sequencias: '3200 – OP 327\n3103 – OP 327\n3215 – OP 327',
+  turnoA: 50.00,
+  turnoB: 20.00,
+  turnoC: 40.00,
+};
+
+export default function App() {
+  const [data, setData] = useState<InformativoData>(defaultData);
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans">
+      <div className="max-w-6xl mx-auto space-y-8">
+        
+        <header className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Gerador de Informativo Diário</h1>
+            <p className="text-gray-600 mt-2">Preencha os dados abaixo e tire um print do resultado gerado.</p>
+          </div>
+          <div className="flex-shrink-0">
+            <PWAInstallButton />
+          </div>
+        </header>
+
+        {/* Edit Section */}
+        <section>
+          <InformativoForm data={data} onChange={setData} />
+        </section>
+
+        {/* Preview Section */}
+        <section className="mt-12 flex flex-col items-center">
+          <div className="w-full flex justify-between items-center mb-4">
+             <h2 className="text-xl font-bold text-gray-800">Visualização para Print</h2>
+             <span className="text-sm text-gray-500 hidden md:block">Dica: No celular, role para o lado e vire a tela.</span>
+          </div>
+          
+          <div className="w-full overflow-x-auto bg-gray-200 rounded-xl p-4 md:p-8 flex justify-center shadow-inner">
+            <InformativoPreview data={data} />
+          </div>
+        </section>
+        
+      </div>
+    </div>
+  );
+}

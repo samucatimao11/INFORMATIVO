@@ -1,0 +1,6 @@
+{
+  "name": "Gerador de Informativo",
+  "description": "Aplicativo para gerar informativos diários para captura de tela e envio em grupos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
