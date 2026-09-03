@@ -19,7 +19,7 @@ export function InformativoPreview({ data }: PreviewProps) {
   return (
     <div className="w-[900px] bg-white p-8 shrink-0 relative overflow-hidden flex gap-6" id="informativo-card">
       {/* Left Area (Header + Text Columns) */}
-      <div className="flex-[2.2] flex flex-col">
+      <div className="flex-[2.1] flex flex-col">
         {/* Top Header Section */}
         <div className="flex items-center gap-3 mb-2">
           <Send className="w-8 h-8 text-[#6bb52e] fill-current -rotate-45 transform translate-y-[-4px]" />
@@ -97,7 +97,7 @@ export function InformativoPreview({ data }: PreviewProps) {
       </div>
 
       {/* Right Column (Chart Box) */}
-      <div className="flex-[1.4] relative">
+      <div className="flex-[1.5] relative">
         {/* Target Icon overlapping the border */}
         <div className="absolute top-[68px] -left-5 bg-white rounded-full p-1 z-10 flex items-center justify-center">
           <Target className="w-8 h-8 text-[#6bb52e]" strokeWidth={2.5} />
@@ -113,56 +113,59 @@ export function InformativoPreview({ data }: PreviewProps) {
           </div>
 
           {/* Bar Chart Area */}
-          <div className="flex-1 flex items-end justify-between px-4 pb-8 pt-6 relative mt-4 border-b border-[#002f5d]/20">
+          <div className="flex-1 flex items-end justify-between pl-2 pr-6 pb-8 pt-6 relative mt-4 border-b border-[#002f5d]/20">
             {/* Turno A */}
-            <div className="flex flex-col items-center justify-end w-12 h-full relative group">
+            <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#485b6b] relative" 
                 style={{ height: `${(data.turnoA / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(data.turnoA)}</span>
               </div>
-              <span className="absolute -bottom-6 text-xs font-bold text-[#002f5d] whitespace-nowrap">TURNO A</span>
+              <span className="absolute -bottom-6 text-[10px] font-bold text-[#002f5d] whitespace-nowrap tracking-tighter">TURNO A</span>
             </div>
             
             {/* Turno B */}
-            <div className="flex flex-col items-center justify-end w-12 h-full relative group">
+            <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#485b6b] relative" 
                 style={{ height: `${(data.turnoB / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(data.turnoB)}</span>
               </div>
-              <span className="absolute -bottom-6 text-xs font-bold text-[#002f5d] whitespace-nowrap">TURNO B</span>
+              <span className="absolute -bottom-6 text-[10px] font-bold text-[#002f5d] whitespace-nowrap tracking-tighter">TURNO B</span>
             </div>
 
             {/* Turno C */}
-            <div className="flex flex-col items-center justify-end w-12 h-full relative group">
+            <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#485b6b] relative" 
                 style={{ height: `${(data.turnoC / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(data.turnoC)}</span>
               </div>
-              <span className="absolute -bottom-6 text-xs font-bold text-[#002f5d] whitespace-nowrap">TURNO C</span>
+              <span className="absolute -bottom-6 text-[10px] font-bold text-[#002f5d] whitespace-nowrap tracking-tighter">TURNO C</span>
             </div>
 
             {/* Total */}
-            <div className="flex flex-col items-center justify-end w-12 h-full relative group">
+            <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#6bb52e] relative" 
                 style={{ height: `${(total / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(total)}</span>
               </div>
-              <span className="absolute -bottom-6 text-xs font-bold text-[#002f5d] whitespace-nowrap">TOTAL</span>
+              <span className="absolute -bottom-6 text-[10px] font-bold text-[#002f5d] whitespace-nowrap tracking-tighter">TOTAL</span>
             </div>
           </div>
           
           {/* Small icon in bottom right */}
-          <div className="absolute -bottom-2 -right-2 bg-[#6bb52e] rounded-xl p-2 z-10 w-12 h-12 flex items-center justify-center">
-             <Send className="w-6 h-6 text-white rotate-45" />
-          </div>
+          <img 
+            src="https://dkozrkzoghhylgvddkze.supabase.co/storage/v1/object/public/HERB/LOGO%20(3).png" 
+            alt="Logo" 
+            crossOrigin="anonymous"
+            className="absolute -bottom-2 -right-2 z-10 w-10 h-10 rounded-lg object-contain shadow-sm bg-white"
+          />
         </div>
       </div>
     </div>
