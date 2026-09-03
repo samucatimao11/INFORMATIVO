@@ -24,8 +24,11 @@ const defaultData: InformativoData = {
   recomendacao: 'ALION – 0,120\nMEGA BR – 4,50\nSINERGE – 3,00\nJUMP – 3,50',
   sequencias: '3200 – OP 327\n3103 – OP 327\n3215 – OP 327',
   turnoA: 50.00,
+  obsTurnoA: 'Ex: Choveu na madrugada',
   turnoB: 20.00,
+  obsTurnoB: '',
   turnoC: 40.00,
+  obsTurnoC: '',
 };
 
 export default function App() {

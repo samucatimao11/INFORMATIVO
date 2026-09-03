@@ -92,15 +92,18 @@ export function InformativoForm({ data, onChange }: FormProps) {
         <div className="grid grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Turno A</label>
-            <input type="number" name="turnoA" value={data.turnoA} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500" />
+            <input type="number" name="turnoA" value={data.turnoA} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 mb-2" />
+            <input type="text" name="obsTurnoA" value={data.obsTurnoA} onChange={handleChange} placeholder="Observações..." className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 text-xs" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Turno B</label>
-            <input type="number" name="turnoB" value={data.turnoB} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500" />
+            <input type="number" name="turnoB" value={data.turnoB} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 mb-2" />
+            <input type="text" name="obsTurnoB" value={data.obsTurnoB} onChange={handleChange} placeholder="Observações..." className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 text-xs" />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Turno C</label>
-            <input type="number" name="turnoC" value={data.turnoC} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500" />
+            <input type="number" name="turnoC" value={data.turnoC} onChange={handleChange} className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 mb-2" />
+            <input type="text" name="obsTurnoC" value={data.obsTurnoC} onChange={handleChange} placeholder="Observações..." className="w-full p-2 border rounded focus:ring-2 focus:ring-lime-500 text-xs" />
           </div>
         </div>
       </div>

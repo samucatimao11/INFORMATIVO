@@ -121,10 +121,19 @@ export function InformativoPreview({ data }: PreviewProps) {
         <div className="border-[3px] border-[#002f5d] rounded-[30px] p-6 pt-8 h-full flex flex-col relative">
           <h2 className="text-xl font-bold text-[#002f5d] text-center mb-4">RENDIMENTO TURNOS</h2>
           
-          <div className="text-left ml-4 mb-6 font-bold text-lg">
-            <div className="text-[#002f5d]">TURNO A: </div>
-            <div className="text-[#002f5d]">TURNO B: </div>
-            <div className="text-[#002f5d]">TURNO C: </div>
+          <div className="text-left ml-4 mb-6 font-bold text-sm flex flex-col gap-1.5">
+            <div className="flex text-[#002f5d] leading-tight items-start">
+              <span className="whitespace-nowrap w-20">TURNO A:</span>
+              <span className="font-normal text-sm flex-1 pt-[1px] leading-tight text-[#002f5d]">{data.obsTurnoA}</span>
+            </div>
+            <div className="flex text-[#002f5d] leading-tight items-start">
+              <span className="whitespace-nowrap w-20">TURNO B:</span>
+              <span className="font-normal text-sm flex-1 pt-[1px] leading-tight text-[#002f5d]">{data.obsTurnoB}</span>
+            </div>
+            <div className="flex text-[#002f5d] leading-tight items-start">
+              <span className="whitespace-nowrap w-20">TURNO C:</span>
+              <span className="font-normal text-sm flex-1 pt-[1px] leading-tight text-[#002f5d]">{data.obsTurnoC}</span>
+            </div>
           </div>
 
           {/* Bar Chart Area */}

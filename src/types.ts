@@ -11,6 +11,9 @@ export interface InformativoData {
   recomendacao: string;
   sequencias: string;
   turnoA: number;
+  obsTurnoA: string;
   turnoB: number;
+  obsTurnoB: string;
   turnoC: number;
+  obsTurnoC: string;
 }
