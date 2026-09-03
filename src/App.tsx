@@ -4,6 +4,8 @@
  */
 
 import { useState } from 'react';
+import html2canvas from 'html2canvas';
+import { Camera } from 'lucide-react';
 import { InformativoForm } from './components/InformativoForm';
 import { InformativoPreview } from './components/InformativoPreview';
 import { PWAInstallButton } from './components/PWAInstallButton';
@@ -25,6 +27,32 @@ const defaultData: InformativoData = {
 
 export default function App() {
   const [data, setData] = useState<InformativoData>(defaultData);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const handleDownloadImage = async () => {
+    const element = document.getElementById('informativo-card');
+    if (!element) return;
+    
+    setIsGenerating(true);
+    try {
+      const canvas = await html2canvas(element, {
+        scale: 2, // Double resolution for better quality
+        useCORS: true,
+        backgroundColor: '#ffffff'
+      });
+      
+      const dataURL = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = `Informativo_${data.frente}_${data.setor}.png`;
+      link.click();
+    } catch (error) {
+      console.error('Error generating image:', error);
+      alert('Erro ao gerar a imagem. Tente novamente.');
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-4 md:p-8 font-sans">
@@ -33,7 +61,7 @@ export default function App() {
         <header className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">Gerador de Informativo Diário</h1>
-            <p className="text-gray-600 mt-2">Preencha os dados abaixo e tire um print do resultado gerado.</p>
+            <p className="text-gray-600 mt-2">Preencha os dados abaixo e baixe a imagem para enviar no WhatsApp.</p>
           </div>
           <div className="flex-shrink-0">
             <PWAInstallButton />
@@ -48,8 +76,16 @@ export default function App() {
         {/* Preview Section */}
         <section className="mt-12 flex flex-col items-center">
           <div className="w-full flex justify-between items-center mb-4">
-             <h2 className="text-xl font-bold text-gray-800">Visualização para Print</h2>
-             <span className="text-sm text-gray-500 hidden md:block">Dica: No celular, role para o lado e vire a tela.</span>
+             <h2 className="text-xl font-bold text-gray-800">Visualização</h2>
+             
+             <button 
+                onClick={handleDownloadImage}
+                disabled={isGenerating}
+                className="flex items-center gap-2 bg-[#6bb52e] hover:bg-[#5a9c24] text-white font-bold py-2 px-4 rounded-lg shadow transition disabled:opacity-50"
+              >
+                <Camera className="w-5 h-5" />
+                {isGenerating ? 'Gerando...' : 'Baixar Imagem'}
+             </button>
           </div>
           
           <div className="w-full overflow-x-auto bg-gray-200 rounded-xl p-4 md:p-8 flex justify-center shadow-inner">
