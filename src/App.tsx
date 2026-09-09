@@ -8,26 +8,27 @@ import html2canvas from 'html2canvas';
 import { Camera } from 'lucide-react';
 import { InformativoForm } from './components/InformativoForm';
 import { InformativoPreview } from './components/InformativoPreview';
+import { GoogleSheetsIntegration } from './components/GoogleSheetsIntegration';
 import { PWAInstallButton } from './components/PWAInstallButton';
 import { InformativoData } from './types';
 
 const defaultData: InformativoData = {
-  frente: 'AUTOPROPELIDOS',
-  setor: '3284',
-  operacao: '745',
-  equipamentos: '4100874\n4100907\n4100783\n4100602\n4100667',
-  caminhao: '4100615',
-  areaVivencia: '4400338',
-  areaTotal: 230.00,
-  areaRealizado: 30.00,
-  areaARealizar: 200.00,
-  recomendacao: 'ALION – 0,120\nMEGA BR – 4,50\nSINERGE – 3,00\nJUMP – 3,50',
-  sequencias: '3200 – OP 327\n3103 – OP 327\n3215 – OP 327',
-  turnoA: 50.00,
-  obsTurnoA: 'Ex: Choveu na madrugada',
-  turnoB: 20.00,
+  frente: '',
+  setor: '',
+  operacao: '',
+  equipamentos: [],
+  caminhao: [],
+  areaVivencia: '',
+  areaTotal: '',
+  areaRealizado: '',
+  areaARealizar: '',
+  recomendacao: '',
+  sequencias: '',
+  turnoA: '',
+  obsTurnoA: '',
+  turnoB: '',
   obsTurnoB: '',
-  turnoC: 40.00,
+  turnoC: '',
   obsTurnoC: '',
 };
 
@@ -76,6 +77,7 @@ export default function App() {
 
         {/* Edit Section */}
         <section>
+          <GoogleSheetsIntegration data={data} />
           <InformativoForm data={data} onChange={setData} />
         </section>
 

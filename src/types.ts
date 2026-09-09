@@ -2,18 +2,18 @@ export interface InformativoData {
   frente: string;
   setor: string;
   operacao: string;
-  equipamentos: string;
-  caminhao: string;
+  equipamentos: string[];
+  caminhao: string[];
   areaVivencia: string;
-  areaTotal: number;
-  areaRealizado: number;
-  areaARealizar: number;
+  areaTotal: number | string;
+  areaRealizado: number | string;
+  areaARealizar: number | string;
   recomendacao: string;
   sequencias: string;
-  turnoA: number;
+  turnoA: number | string;
   obsTurnoA: string;
-  turnoB: number;
+  turnoB: number | string;
   obsTurnoB: string;
-  turnoC: number;
+  turnoC: number | string;
   obsTurnoC: string;
 }

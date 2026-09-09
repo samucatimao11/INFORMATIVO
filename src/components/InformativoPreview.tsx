@@ -6,15 +6,30 @@ interface PreviewProps {
   data: InformativoData;
 }
 
-const parseList = (text: string) => text.split('\n').filter(line => line.trim() !== '');
+const parseList = (text: string) => (text || '').split('\n').filter(line => line.trim() !== '');
 
 export function InformativoPreview({ data }: PreviewProps) {
-  const total = data.turnoA + data.turnoB + data.turnoC;
+  const tA = Number(String(data.turnoA || 0).replace(',', '.')) || 0;
+  const tB = Number(String(data.turnoB || 0).replace(',', '.')) || 0;
+  const tC = Number(String(data.turnoC || 0).replace(',', '.')) || 0;
+  const total = tA + tB + tC;
   
   // Find max value to scale chart bars relative to the container height
-  const maxVal = Math.max(data.turnoA, data.turnoB, data.turnoC, total) || 1; 
+  const maxVal = Math.max(tA, tB, tC, total) || 1; 
 
-  const formatNumber = (num: number) => num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const themeColor = (() => {
+    switch (data.frente) {
+      case 'AUTOPROPELIDOS': return '#C00000';
+      case 'CATAÇÃO': return '#FFC000';
+      default: return '#6bb52e';
+    }
+  })();
+
+  const formatNumber = (num: number | string) => {
+    const parsed = Number(String(num || 0).replace(',', '.'));
+    if (isNaN(parsed)) return '0,00';
+    return parsed.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  };
 
   return (
     <div className="w-[900px] bg-white p-8 shrink-0 relative overflow-hidden flex gap-6" id="informativo-card">
@@ -22,17 +37,17 @@ export function InformativoPreview({ data }: PreviewProps) {
       <div className="flex-[2.1] flex flex-col">
         {/* Top Header Section */}
         <div className="flex items-center gap-3 mb-2">
-          <Send className="w-8 h-8 text-[#6bb52e] fill-current -rotate-45 transform translate-y-[-4px]" />
+          <Send className="w-8 h-8 fill-current -rotate-45 transform translate-y-[-4px]" style={{ color: themeColor }} />
           <h1 className="text-3xl font-extrabold text-[#002f5d] tracking-wide">
-            FRENTE: <span className="text-[#6bb52e] uppercase">{data.frente}</span>
+            FRENTE: <span className="uppercase" style={{ color: themeColor }}>{data.frente}</span>
           </h1>
         </div>
 
         <div className="flex items-center gap-2 pb-2 border-b-[3px] border-[#002f5d] relative">
-          <Pin className="w-6 h-6 text-[#6bb52e] fill-current" />
+          <Pin className="w-6 h-6 fill-current" style={{ color: themeColor }} />
           <h2 className="text-xl font-bold text-[#002f5d]">
-            SETOR: <span className="text-[#6bb52e]">{data.setor}</span> &nbsp;&nbsp;&nbsp;
-            OPERAÇÃO: <span className="text-[#6bb52e]">{data.operacao}</span>
+            SETOR: <span style={{ color: themeColor }}>{data.setor}</span> &nbsp;&nbsp;&nbsp;
+            OPERAÇÃO: <span style={{ color: themeColor }}>{data.operacao}</span>
           </h2>
         </div>
 
@@ -45,8 +60,8 @@ export function InformativoPreview({ data }: PreviewProps) {
                 <Check className="w-5 h-5 text-[#002f5d]" />
                 <h3 className="text-lg font-bold text-[#002f5d]">EQUIPAMENTOS</h3>
               </div>
-              <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7">
-                {parseList(data.equipamentos).map((item, i) => <span key={i}>{item}</span>)}
+              <div className="font-bold text-lg leading-tight flex flex-col pl-7" style={{ color: themeColor }}>
+                {(data.equipamentos || []).map((item, i) => <span key={i}>{item}</span>)}
               </div>
             </div>
 
@@ -55,8 +70,8 @@ export function InformativoPreview({ data }: PreviewProps) {
                 <Check className="w-5 h-5 text-[#002f5d]" />
                 <h3 className="text-lg font-bold text-[#002f5d]">CAMINHÃO</h3>
               </div>
-              <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7">
-                {parseList(data.caminhao).map((item, i) => <span key={i}>{item}</span>)}
+              <div className="font-bold text-lg leading-tight flex flex-col pl-7" style={{ color: themeColor }}>
+                {(data.caminhao || []).map((item, i) => <span key={i}>{item}</span>)}
               </div>
             </div>
 
@@ -65,7 +80,7 @@ export function InformativoPreview({ data }: PreviewProps) {
                 <Check className="w-5 h-5 text-[#002f5d]" />
                 <h3 className="text-lg font-bold text-[#002f5d]">ÁREA DE VIVENCIA</h3>
               </div>
-              <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7">
+              <div className="font-bold text-lg leading-tight flex flex-col pl-7" style={{ color: themeColor }}>
                 {parseList(data.areaVivencia).map((item, i) => <span key={i}>{item}</span>)}
               </div>
             </div>
@@ -80,9 +95,9 @@ export function InformativoPreview({ data }: PreviewProps) {
                 <h3 className="text-lg font-bold text-[#002f5d]">ÁREA SETOR (ha)</h3>
               </div>
               <div className="text-[#002f5d] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
-                <div>TOTAL: <span className="text-[#6bb52e]">{formatNumber(data.areaTotal)}</span></div>
-                <div>REALIZADO: <span className="text-[#6bb52e]">{formatNumber(data.areaRealizado)}</span></div>
-                <div>Á REALIZAR: <span className="text-[#6bb52e]">{formatNumber(data.areaARealizar)}</span></div>
+                <div>TOTAL: <span style={{ color: themeColor }}>{formatNumber(data.areaTotal)}</span></div>
+                <div>REALIZADO: <span style={{ color: themeColor }}>{formatNumber(data.areaRealizado)}</span></div>
+                <div>Á REALIZAR: <span style={{ color: themeColor }}>{formatNumber(data.areaARealizar)}</span></div>
               </div>
             </div>
 
@@ -92,7 +107,7 @@ export function InformativoPreview({ data }: PreviewProps) {
                   <Check className="w-5 h-5 text-[#002f5d]" />
                   <h3 className="text-lg font-bold text-[#002f5d] leading-tight">RECOMENDAÇÃO</h3>
                 </div>
-                <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
+                <div className="font-bold text-lg leading-tight flex flex-col pl-7 mt-1" style={{ color: themeColor }}>
                   {parseList(data.recomendacao).map((item, i) => <span key={i}>{item}</span>)}
                 </div>
               </div>
@@ -102,7 +117,7 @@ export function InformativoPreview({ data }: PreviewProps) {
                   <Check className="w-5 h-5 text-[#002f5d]" />
                   <h3 className="text-lg font-bold text-[#002f5d]">SEQUENCIAS</h3>
                 </div>
-                <div className="text-[#6bb52e] font-bold text-lg leading-tight flex flex-col pl-7 mt-1">
+                <div className="font-bold text-lg leading-tight flex flex-col pl-7 mt-1" style={{ color: themeColor }}>
                   {parseList(data.sequencias).map((item, i) => <span key={i}>{item}</span>)}
                 </div>
               </div>
@@ -115,7 +130,7 @@ export function InformativoPreview({ data }: PreviewProps) {
       <div className="flex-[1.5] relative">
         {/* Target Icon overlapping the border */}
         <div className="absolute top-[68px] -left-5 bg-white rounded-full p-1 z-10 flex items-center justify-center">
-          <Target className="w-8 h-8 text-[#6bb52e]" strokeWidth={2.5} />
+          <Target className="w-8 h-8" strokeWidth={2.5} style={{ color: themeColor }} />
         </div>
         
         <div className="border-[3px] border-[#002f5d] rounded-[30px] p-6 pt-8 h-full flex flex-col relative">
@@ -142,7 +157,7 @@ export function InformativoPreview({ data }: PreviewProps) {
             <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#485b6b] relative" 
-                style={{ height: `${(data.turnoA / maxVal) * 90}%` }}
+                style={{ height: `${(tA / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(data.turnoA)}</span>
               </div>
@@ -153,7 +168,7 @@ export function InformativoPreview({ data }: PreviewProps) {
             <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#485b6b] relative" 
-                style={{ height: `${(data.turnoB / maxVal) * 90}%` }}
+                style={{ height: `${(tB / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(data.turnoB)}</span>
               </div>
@@ -164,7 +179,7 @@ export function InformativoPreview({ data }: PreviewProps) {
             <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full bg-[#485b6b] relative" 
-                style={{ height: `${(data.turnoC / maxVal) * 90}%` }}
+                style={{ height: `${(tC / maxVal) * 90}%` }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(data.turnoC)}</span>
               </div>
@@ -174,8 +189,8 @@ export function InformativoPreview({ data }: PreviewProps) {
             {/* Total */}
             <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
-                className="w-full bg-[#6bb52e] relative" 
-                style={{ height: `${(total / maxVal) * 90}%` }}
+                className="w-full relative" 
+                style={{ height: `${(total / maxVal) * 90}%`, backgroundColor: themeColor }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(total)}</span>
               </div>
