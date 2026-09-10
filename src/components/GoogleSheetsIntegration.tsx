@@ -107,7 +107,8 @@ export function GoogleSheetsIntegration({ data }: Props) {
         data.turnoB,
         data.obsTurnoB,
         data.turnoC,
-        data.obsTurnoC
+        data.obsTurnoC,
+        data.dataDaAtividade.split('-').reverse().join('/')
       ]);
       setSaveStatus('success');
       setTimeout(() => setSaveStatus('idle'), 3000);

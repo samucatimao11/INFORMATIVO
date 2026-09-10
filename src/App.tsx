@@ -13,6 +13,7 @@ import { PWAInstallButton } from './components/PWAInstallButton';
 import { InformativoData } from './types';
 
 const defaultData: InformativoData = {
+  dataDaAtividade: new Date().toISOString().slice(0, 10),
   frente: '',
   setor: '',
   operacao: '',

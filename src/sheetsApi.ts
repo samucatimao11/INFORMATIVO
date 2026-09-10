@@ -51,7 +51,8 @@ export async function createSpreadsheet(title: string): Promise<string> {
     'Turno B',
     'Obs Turno B',
     'Turno C',
-    'Obs Turno C'
+    'Obs Turno C',
+    'Data da Atividade'
   ]);
 
   return spreadsheetId;
@@ -61,7 +62,7 @@ export async function appendRow(spreadsheetId: string, values: any[]) {
   const token = await getAccessToken();
   if (!token) throw new Error('Not authenticated');
 
-  const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Histórico!A1:R1:append?valueInputOption=USER_ENTERED`, {
+  const res = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/Histórico!A1:Z1:append?valueInputOption=USER_ENTERED`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,

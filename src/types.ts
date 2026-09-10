@@ -1,4 +1,5 @@
 export interface InformativoData {
+  dataDaAtividade: string;
   frente: string;
   setor: string;
   operacao: string;

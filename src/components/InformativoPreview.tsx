@@ -36,11 +36,18 @@ export function InformativoPreview({ data }: PreviewProps) {
       {/* Left Area (Header + Text Columns) */}
       <div className="flex-[2.1] flex flex-col">
         {/* Top Header Section */}
-        <div className="flex items-center gap-3 mb-2">
-          <Send className="w-8 h-8 fill-current -rotate-45 transform translate-y-[-4px]" style={{ color: themeColor }} />
-          <h1 className="text-3xl font-extrabold text-[#002f5d] tracking-wide">
-            FRENTE: <span className="uppercase" style={{ color: themeColor }}>{data.frente}</span>
-          </h1>
+        <div className="flex items-center justify-between mb-2 pr-6">
+          <div className="flex items-center gap-3">
+            <Send className="w-8 h-8 fill-current -rotate-45 transform translate-y-[-4px]" style={{ color: themeColor }} />
+            <h1 className="text-3xl font-extrabold text-[#002f5d] tracking-wide">
+              FRENTE: <span className="uppercase" style={{ color: themeColor }}>{data.frente}</span>
+            </h1>
+          </div>
+          {data.dataDaAtividade && (
+            <div className="text-sm font-bold text-[#002f5d] border-b-[1.5px] border-transparent" style={{ borderColor: themeColor }}>
+              DATA: <span style={{ color: themeColor }}>{data.dataDaAtividade.split('-').reverse().join('/')}</span>
+            </div>
+          )}
         </div>
 
         <div className="flex items-center gap-2 pb-2 border-b-[3px] border-[#002f5d] relative">
