@@ -8,7 +8,6 @@ import html2canvas from 'html2canvas';
 import { Camera } from 'lucide-react';
 import { InformativoForm } from './components/InformativoForm';
 import { InformativoPreview } from './components/InformativoPreview';
-import { GoogleSheetsIntegration } from './components/GoogleSheetsIntegration';
 import { PWAInstallButton } from './components/PWAInstallButton';
 import { InformativoData } from './types';
 
@@ -78,7 +77,6 @@ export default function App() {
 
         {/* Edit Section */}
         <section>
-          <GoogleSheetsIntegration data={data} />
           <InformativoForm data={data} onChange={setData} />
         </section>
 
