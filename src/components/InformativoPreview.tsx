@@ -197,7 +197,7 @@ export function InformativoPreview({ data }: PreviewProps) {
             <div className="flex flex-col items-center justify-end w-10 h-full relative group">
               <div 
                 className="w-full relative" 
-                style={{ height: `${(total / maxVal) * 90}%`, backgroundColor: themeColor }}
+                style={{ height: `${(total / maxVal) * 90}%`, backgroundColor: '#76B82A' }}
               >
                 <span className="text-sm font-bold text-[#002f5d] absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">{formatNumber(total)}</span>
               </div>
