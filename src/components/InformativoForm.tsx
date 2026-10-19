@@ -44,7 +44,7 @@ export function InformativoForm({ data, onChange }: FormProps) {
   };
 
   const frentesOptions = ["AUTOPROPELIDOS", "BARRA CENTRAL", "CATAÇÃO"];
-  const equipamentosOptions = ["4201027", "4201028", "4200867", "4200869", "4200870", "4200722", "4200782", "4200783", "4200602", "4200907", "4200874", "4200667"];
+  const equipamentosOptions = ["4201027", "4201028", "4201069", "4200867", "4200869", "4200870", "4200722", "4200782", "4200783", "4200602", "4200907", "4200874", "4200667"];
   const caminhaoOptions = ["4100430", "4100615", "4100616", "4100467", "4100468", "4100469", "4100501", "4100498"];
   const areaVivenciaOptions = ["4400338", "4400361", "4402026", "4402027"];
 
